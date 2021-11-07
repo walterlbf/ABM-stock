@@ -1,24 +1,99 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+function FormCadastro(props) {
+  const produtoInicial = {
+    id: null,
+    quantity: String,
+    product: String,
+    price: String,
+  };
+
+  const [produtoState, setProdutoState] = useState(produtoInicial);
+
+  const handleInputChange = (event) => {
+    setProdutoState({
+      ...produtoState,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.addProduto(produtoState);
+    setProdutoState(produtoInicial);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={handleSubmit} >
+      <label>_id:</label>
+      <br />
+      <input name="id" type="text" onChange={handleInputChange} />
+      <br />
+      <label>Quantity:</label>
+      <br />
+      <input name="quantity" type="text" onChange={handleInputChange} />
+      <br />
+      <label>Product Name:</label>
+      <br />
+      <input name="product" type="text" onChange={handleInputChange} />
+      <br />
+      <label>Price:</label>
+      <br />
+      <input name="price" type="text" onChange={handleInputChange} />
+      <br />
+      <input type="submit" value="Add Produto" />
+    </form>
+  );
+}
+
+function InformationTable(props) {
+
+  const display =
+    props.produtos.length > 0 ? (
+      props.produtos.map((produto, index) => (
+        <tr key={index}>
+          <td>{produto.id}</td>
+          <td>{produto.quantity}</td>
+          <td>{produto.product}</td>
+          <td>{produto.price}</td>
+        </tr>
+      ))
+    ) : (
+      <tr>
+        <td colSpan={4}>&nbsp;</td>
+      </tr>
+    );
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>_id</th>
+          <th>Quantity</th>
+          <th>Product Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>{display}</tbody>
+    </table>
+  );
+}
+
+function App(props) {
+  const produtoArray = [];
+
+  const [produtos, setProdutos] = useState(produtoArray);
+
+  const addProduto = (produto) => {
+    produto.id = produtos.length + 1;
+    setProdutos([...produtos, produto]);
+  };
+
+  return (
+    <section>
+      <FormCadastro addProduto={addProduto} />
+      <InformationTable produtos={produtos} />
+    </section>
   );
 }
 
