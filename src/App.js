@@ -3,9 +3,9 @@ import React, { useState } from "react";
 function FormCadastro(props) {
   const produtoInicial = {
     id: null,
-    quantity: String,
-    product: String,
-    price: String,
+    quantity: 0,
+    product: "",
+    price: 0,
   };
 
   const [produtoState, setProdutoState] = useState(produtoInicial);
@@ -19,15 +19,15 @@ function FormCadastro(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.addProduto(produtoState);
-    setProdutoState(produtoInicial);
+    if (produtoState.quantity) {
+      props.addProduto(produtoState);
+      setProdutoState(produtoInicial);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} >
-      <label>_id:</label>
-      <br />
-      <input name="id" type="text" onChange={handleInputChange} />
+      <h1> ABM STOCK </h1>
       <br />
       <label>Quantity:</label>
       <br />
