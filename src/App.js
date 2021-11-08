@@ -19,7 +19,7 @@ function FormCadastro(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (produtoState.quantity) {
+    if (produtoState.quantity || produtoState.product || produtoState.price) {
       props.addProduto(produtoState);
       setProdutoState(produtoInicial);
     }
