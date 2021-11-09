@@ -46,16 +46,78 @@ function FormCadastro(props) {
   );
 }
 
-function InformationTable(props) {
+// function InformationTable(props) {
+//   const [] = useState()
+
+//   const deletarProduto = (index) => {
+//     console.log(props.produtos[index]);
+//     props.produtos.splice(index, 1);
+//     console.log(props.produtos);
+//   };
+
+//   const display =
+//     props.produtos.length > 0 ? (
+//       props.produtos.map((produto, index) => (
+//         <tr key={index}>
+//           <td>{produto.id}</td>
+//           <td>{produto.quantity}</td>
+//           <td>{produto.product}</td>
+//           <td>{produto.price}</td>
+//           <td>Select</td>
+//           <td onClick={() => deletarProduto(index)}>Delete</td>
+
+//         </tr>
+//       ))
+//     ) : (
+//       <tr>
+//         <td colSpan={4}>&nbsp;</td>
+//       </tr>
+//     );
+
+//   return (
+//     <table>
+//       <thead>
+//         <tr>
+//           <th>_id</th>
+//           <th>Quantity</th>
+//           <th>Product Name</th>
+//           <th>Price</th>
+//         </tr>
+//       </thead>
+//       <tbody>{display}</tbody>
+//     </table>
+//   );
+// }
+
+function App(props) {
+  const produtoArray = [];
+
+  const [produtos, setProdutos] = useState(produtoArray);
+
+
+
+  const addProduto = (produto) => {
+    produto.id = produtos.length + 1;
+    setProdutos([...produtos, produto]);
+  };
+
+  const deletarProduto = (index) => {
+    const produtosCopy = Array.from(produtos);
+    produtosCopy.splice(index, 1);
+    setProdutos(produtosCopy);
+  };
 
   const display =
-    props.produtos.length > 0 ? (
-      props.produtos.map((produto, index) => (
+    produtos.length > 0 ? (
+      produtos.map((produto, index) => (
         <tr key={index}>
           <td>{produto.id}</td>
           <td>{produto.quantity}</td>
           <td>{produto.product}</td>
           <td>{produto.price}</td>
+          <td className="button">Select</td>
+          <td className="button" onClick={() => deletarProduto(index)}>Delete</td>
+
         </tr>
       ))
     ) : (
@@ -64,35 +126,22 @@ function InformationTable(props) {
       </tr>
     );
 
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>_id</th>
-          <th>Quantity</th>
-          <th>Product Name</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>{display}</tbody>
-    </table>
-  );
-}
-
-function App(props) {
-  const produtoArray = [];
-
-  const [produtos, setProdutos] = useState(produtoArray);
-
-  const addProduto = (produto) => {
-    produto.id = produtos.length + 1;
-    setProdutos([...produtos, produto]);
-  };
 
   return (
     <section>
       <FormCadastro addProduto={addProduto} />
-      <InformationTable produtos={produtos} />
+      {/* <InformationTable produtos={produtos} setProdutoState={setProdutos} /> */}
+      <table>
+        <thead>
+          <tr>
+            <th>_id</th>
+            <th>Quantity</th>
+            <th>Product Name</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>{display}</tbody>
+      </table>
     </section>
   );
 }
