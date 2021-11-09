@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 
 function FormCadastro(props) {
   const produtoInicial = {
@@ -81,8 +82,8 @@ function App() {
           <td>{produto.quantity}</td>
           <td>{produto.product}</td>
           <td>{produto.price}</td>
-          <td className="button">Select</td>
-          <td className="button" onClick={() => deletarProduto(index)}>Delete</td>
+          <td className="buttonSelect">Select</td>
+          <td className="buttonDelete" onClick={() => deletarProduto(index)}>Delete</td>
 
         </tr>
       ))
