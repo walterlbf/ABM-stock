@@ -97,14 +97,23 @@ function App(props) {
 
 
   const addProduto = (produto) => {
-    produto.id = produtos.length + 1;
-    setProdutos([...produtos, produto]);
+    const produtosCopia = Array.from(produtos);
+
+    // produto.id = produtos.length + 1;
+    produtosCopia.push({
+      id: produtos.length + 1,
+      quantity: produto.quantity,
+      product: produto.product,
+      price: produto.price,
+    });
+
+    setProdutos(produtosCopia);
   };
 
   const deletarProduto = (index) => {
-    const produtosCopy = Array.from(produtos);
-    produtosCopy.splice(index, 1);
-    setProdutos(produtosCopy);
+    const produtosCopia = Array.from(produtos);
+    produtosCopia.splice(index, 1);
+    setProdutos(produtosCopia);
   };
 
   const display =
