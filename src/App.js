@@ -46,50 +46,7 @@ function FormCadastro(props) {
   );
 }
 
-// function InformationTable(props) {
-//   const [] = useState()
-
-//   const deletarProduto = (index) => {
-//     console.log(props.produtos[index]);
-//     props.produtos.splice(index, 1);
-//     console.log(props.produtos);
-//   };
-
-//   const display =
-//     props.produtos.length > 0 ? (
-//       props.produtos.map((produto, index) => (
-//         <tr key={index}>
-//           <td>{produto.id}</td>
-//           <td>{produto.quantity}</td>
-//           <td>{produto.product}</td>
-//           <td>{produto.price}</td>
-//           <td>Select</td>
-//           <td onClick={() => deletarProduto(index)}>Delete</td>
-
-//         </tr>
-//       ))
-//     ) : (
-//       <tr>
-//         <td colSpan={4}>&nbsp;</td>
-//       </tr>
-//     );
-
-//   return (
-//     <table>
-//       <thead>
-//         <tr>
-//           <th>_id</th>
-//           <th>Quantity</th>
-//           <th>Product Name</th>
-//           <th>Price</th>
-//         </tr>
-//       </thead>
-//       <tbody>{display}</tbody>
-//     </table>
-//   );
-// }
-
-function App(props) {
+function App() {
   const produtoArray = [];
 
   const [produtos, setProdutos] = useState(produtoArray);
@@ -99,7 +56,6 @@ function App(props) {
   const addProduto = (produto) => {
     const produtosCopia = Array.from(produtos);
 
-    // produto.id = produtos.length + 1;
     produtosCopia.push({
       id: produtos.length + 1,
       quantity: produto.quantity,
@@ -110,8 +66,9 @@ function App(props) {
     setProdutos(produtosCopia);
   };
 
+
   const deletarProduto = (index) => {
-    const produtosCopia = Array.from(produtos);
+    const produtosCopia = Array.from(produtos); // https://pt-br.reactjs.org/docs/state-and-lifecycle.html
     produtosCopia.splice(index, 1);
     setProdutos(produtosCopia);
   };
@@ -139,7 +96,6 @@ function App(props) {
   return (
     <section>
       <FormCadastro addProduto={addProduto} />
-      {/* <InformationTable produtos={produtos} setProdutoState={setProdutos} /> */}
       <table>
         <thead>
           <tr>
